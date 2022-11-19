@@ -13,10 +13,6 @@ document.getElementById("send-text").addEventListener('click', function(event) {
     requestOne.open("GET", "http://localhost/API/other");
     requestOne.onreadystatechange = onRequstUpdate;
 
-    if (requestOne.Request == "OPTIONS") {
-     return;
-    }
-
     requestOne.send();
     onRequstUpdate(event);
 });
