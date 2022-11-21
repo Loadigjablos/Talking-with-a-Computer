@@ -7,6 +7,8 @@ namespace Program
     */
     class Program
     {
+        static private Random random = new Random(); 
+
         /**
         * Start of the program
         */
@@ -14,9 +16,9 @@ namespace Program
         {
             bool done = false;
             while (done == false) {
-                Console.Write("('!' Comand, '?' Question, ' ' Statement, 'done' quit)> ");
+                Console.Write("('-q' to quit)> ");
                 var text = Console.ReadLine();
-                if (text.Equals("done")) {
+                if (text.Equals("-q")) {
                     done = true;
                     Console.WriteLine("bye");
                 } else if (!(text.Equals(""))) {
@@ -26,10 +28,12 @@ namespace Program
                     Console.BackgroundColor = ConsoleColor.Red;
                     Console.WriteLine("empty request");
                 }
-                Console.ForegroundColor = ConsoleColor.Black;
-                Console.BackgroundColor = ConsoleColor.White;
+                Console.ResetColor();
                 Console.WriteLine(" ");
             }
+        }
+        static public int randomNumber(int max) {
+            return random.Next(0, max);
         }
     }
 }

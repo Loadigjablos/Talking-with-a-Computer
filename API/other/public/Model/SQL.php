@@ -1,6 +1,6 @@
 <?php
     // Database conection string
-    $database = new mysqli("localhost", "root", "", "ai_test");
+    $database = new mysqli("RESTRICTED INFORMATION");
 
     /**
     * returns a product infromation

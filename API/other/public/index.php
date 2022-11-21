@@ -11,6 +11,9 @@
     // allows Using Slim and build our application.
     use Slim\Factory\AppFactory;
 
+    // To create a JWT Token for authentication
+    use ReallySimpleJWT\Token;
+
     // all the libraries we need.
     require __DIR__ . "/../vendor/autoload.php";
     // self made functions
@@ -23,7 +26,63 @@
     $app = AppFactory::create();
 
     // the URL must be 'http://[Domain]/API/other/' To Work
-    $app->setBasePath("/API/other");
+    $app->setBasePath("/streit-dominic/API/other");
+
+        /**
+    * @OA\Post(
+    *   path="/Login",
+    *   summary="You can authenticate yourself",
+    *   tags={"Login"},
+    *   requestBody=@OA\RequestBody(
+    *       request="Localhost/Login",
+    *       required=true,
+    *       description="Password and username",
+    *       @OA\MediaType(
+    *           mediaType="application/json",
+    *           @OA\Schema(
+    *               @OA\Property(property="Password", type="string", example="wu3Ao82832#sd1U+asc9"),
+    *               @OA\Property(property="username", type="string", example="Steven")
+    *           )
+    *       )
+    *   ),
+    *   @OA\Response(response="201", description="Succesfully authenticated"),
+    *   @OA\Response(response="400", description="Invalid input"),
+    *   @OA\Response(response="404", description="Invalid Input"),
+    *   @OA\Response(response="500", description="Server Error")
+    * )
+    */
+    $app->post("/Login", function (Request $request, Response $response, $args) {
+        // reads the requested JSON body
+        $body_content = file_get_contents("php://input");
+        $JSON_data = json_decode($body_content, true);
+
+        // if JSON data doesn't have these then there is an error
+        if (isset($JSON_data["username"]) && isset($JSON_data["password"])) { } else {
+            error_function(400, "Empty request");
+        }
+
+        // Prepares the data to prevent bad data, SQL injection andCross site scripting
+        $username = validate_string($JSON_data["username"]);
+        $password = validate_string($JSON_data["password"]);
+
+        if (!$password) {
+            error_function(400, "password is invalid, must contain at least 5 characters");
+        }
+        if (!$username) {
+            error_function(400, "username is invalid, must contain at least 5 characters");
+        }
+
+        // validates if the right passwd and username are set.
+        if ($username === "RESTRICTED INFORMATION" && $password === "RESTRICTED INFORMATION") {
+            //creates the JWT token and puts it in the cookies.
+            setcookie("token", Token::create("_root", "sec!ReT423*&", time() + 3600, "localhost"));
+            message_function(200, "Succesfuly authenticated");
+        } else {
+            error_function(401, "Wrong");
+        }
+
+        return $response; 
+    });
 
     /**
     * @OA\Get(
@@ -100,6 +159,7 @@
     * )
     */
     $app->post("/Value", function (Request $request, Response $response, $args) {
+        validate_token();
         // reads the requested JSON body
         $body_content = file_get_contents("php://input");
         $JSON_data = json_decode($body_content, true);
@@ -112,17 +172,13 @@
         // Prepares the data to prevent bad data, SQL injection andCross site scripting
         $key = validate_string($JSON_data["key"]);
 
-        for ($i = 0; $i < count($value); $i++) {
-            $value[$i] = str_replace("$", $thing, "[DOLAR]");
-        }
-
-        $values = validate_string(implode("$", $value));
+        $value = validate_string(implode("$", $JSON_data["value"]));
 
         if (!$key || !$value) {
            error_function(400, "empty strings");
         }
 
-        add_new_search_sentence($key, $values);
+        add_new_search_sentence($key, $value);
 
         echo true;
 

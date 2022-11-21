@@ -2,8 +2,15 @@ using System.Net.Http;
 
 namespace Program
 {
+    /**
+     *  instance webclient to GET and POST Data to a server
+     */
     class webClient
     {
+        /**
+         *  @param uRI the location of the server where data will be gatherd
+         *  @return data from the server
+         */
         public String httpGet(String uRI)
         {
             using(var client = new HttpClient())
@@ -16,6 +23,9 @@ namespace Program
             }
         }
 
+        /**
+         * Post data to a server
+         */
         public void httpPost(String uRI) {
             /*
             string json = new JavaScriptSerializer().Serialize(new

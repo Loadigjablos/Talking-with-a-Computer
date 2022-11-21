@@ -54,4 +54,15 @@
         http_response_code($status_code);
         die();
     }
+    use ReallySimpleJWT\Token; // to get the token
+    /**
+     * validates the token in the cookies if it matches with the secret.
+     */
+    function validate_token() {
+        if (isset($_COOKIE["token"]) && Token::validate($_COOKIE["token"], "RESTRICTED INFORMATION")) {
+            return;
+        } else {
+            error_function(401, "unotherised");
+        }
+    }
 ?>

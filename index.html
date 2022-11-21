@@ -1,15 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
-        <meta name="Description" content="What is my IP? Get your current public IP address">
-        <meta name="keywords" content="">
+        <meta name="Description" content="You Can Talk with a computer">
+        <meta name="keywords" content="keyvalue, hello">
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <input id="textInput">
-        <button id="send-text">Send</button>
-        <p id="Conversation"></p>
+        <nav>
+            <a><img src="Menu.png"></a>
+            <div class="menu" >
+                <a href="../">Back</a>
+            </div>
+        </nav>
+        <div class="flex">
+            <h1>Talk With a Computer</h1>
+            <h2>In Englisch</h2>
+        </div>
+        <br>
+        <div class="flex">
+            <input id="textInput" name="send" value="hi">
+            <button id="send-text" name="send">Send</button>
+            <button id="clear-text">Clear</button>
+        </div>
+        <div id="Conversation"></div>
+        <footer>(C) Dominic Streit</footer>
         <script src="script.js"></script>
     </body>
 </html>

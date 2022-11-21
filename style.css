@@ -1,0 +1,101 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    color: #000000;
+    font-family: 'Bahnschrift', sans-serif;
+    font-size: 16px;
+    text-decoration: none;
+}
+nav {
+    text-align: left;
+    position: fixed;
+}
+img {
+    width: 30px;
+}
+html {
+    text-align: center;
+    background-color: #CCCCCC;
+}
+body {
+    text-align: center;
+    align-content: center;
+    display: block;
+}
+#Conversation {
+    align-content: center;
+    text-align: center;
+}
+h1 {
+    font-size: 32px;
+    display: inline-block;
+}
+h2 {
+    font-size: 10px;
+    display: inline-block;
+}
+p {
+    background-color: #999999;
+    width: 70%;
+    border-radius: 5px;
+    margin: 5px;
+    text-align: left;
+}
+button {
+    color: #000000;
+    cursor: pointer;
+    outline: none;
+    background: rgb(50, 154, 255);
+    border: none;
+    border-radius: 2px;
+    margin: 4px;
+    padding: 5px;
+}
+input {
+    width: 70%;
+    color: #000000;
+    background: rgb(50, 154, 255);
+    border: none;
+    margin: 4px;
+    padding: 5px;
+    border-radius: 2px;
+}
+span {
+    color: #000000;
+    padding: 5px;
+    width: 85px;
+    border-radius: 2px;
+    display: inline-block;
+    font-size: 14px;
+}
+.flex {
+    display: inline-flex;
+    margin: 10px;
+}
+.computer {
+    background: #ff5c5c;
+}
+.you {
+    background: #63dbff;
+}
+.menu {
+    display: none;
+    background-color: #999999;
+    padding: 10px;
+}
+a:hover + .menu, .menu:hover, a:active + .menu{
+    display: inline-block;
+}
+@media (max-width: 500px) {
+    h1 {
+        font-size: 16px;
+        display: inline-block;
+    }
+    h2 {
+        font-size: 5px;
+        display: inline-block;
+    }
+    span {
+        font-size: 10px;
+    }
+}

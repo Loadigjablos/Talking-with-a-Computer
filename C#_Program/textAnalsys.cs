@@ -26,13 +26,22 @@ namespace Program
         }
 
         /**
-         * 
+         * @param sen for the URI
+         * @return Data from the server
          */
         public static String sentenceValue(String sen)
         {
             String response = " "; // what the AI will say
 
-            response = webClient.httpGet("http://localhost/API/other/Value/" + sen); // the API will be Questioned if the key exists
+            string jsonString = webClient.httpGet("http://campus.csbe.ch/streit-dominic/API/other/Value/" + sen); // the API will be Questioned if the key exists
+
+            if (jsonString.Contains("output_value")) {
+                string[] responseArray = jsonString.Split("\"");
+                string[] responseArrayTwo = responseArray[3].Split("$");
+                response = responseArrayTwo[Program.randomNumber(responseArrayTwo.Length)];
+            } else {
+                response = "*Silence*";
+            }
 
             return response;
         }
